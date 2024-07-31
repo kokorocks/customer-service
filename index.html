@@ -1,0 +1,529 @@
+<!DOCTYPE html><html lang="en">
+    <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="robots" content="noindex,nofollow" /><meta name="color-scheme" content="dark light"/><meta name="maximum-scale" content="500px" /><title>customer service</title>
+    <div id="wait">someone will be with you in a moment</div>
+    <style>
+      #a {
+        font-size: 50px;
+        height: 70px;
+        background-color: rgb(156, 156, 156);
+        border: white;
+        border-radius: 15%;
+        position: relative;
+        bottom: 10px;
+      }
+      #send {
+        font-size: 100px;
+        height: 75px;
+        position: relative;
+        width: 18;
+        top: 25px;
+        background-color: rgb(156, 156, 156);
+        border: white;
+        border-radius: 15%;
+      }
+      #prompt {
+        width: 75%;
+        font-size: 25px;
+        font-family: sans-serif;
+        position: relative;
+        bottom: 25px;
+        /*border: 5px solid black;*/
+        word-wrap: break-word;
+        border-radius: 25px;
+        padding: 20px;
+        margin-bottom: 20px;
+        min-height: 20px;
+      }
+      #response {
+        flex-direction: "column-reverse";
+        resize: none;
+        height: 425px;
+        border: 2.5px solid rgb(122, 122, 122);
+        text-decoration: solid;
+        overflow-y: auto;
+      }
+      html {
+        text-align: center;
+      }
+      #test {
+        display: none;
+      }
+      progress {
+        cursor: progress;
+      }
+      script {
+        display: none;
+      }
+      .stylrcall {
+        background-color: rgb(211, 67, 67);
+        border: solid black;
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+  <progress id="hide"></progress>
+  <br />
+  <script></script>
+  <div id="response" readonly></div>
+  <br />
+  <div id="typing">waiting for someone to join</div>
+  <br /><br />
+  <input type="text" id="prompt" maxlength="500" placeholder="say something" />
+  <button id="send" onclick="send()">^</button>
+
+<p><!--button id="share">Share with family and friends!</button--></p>
+<p class="result"></p>
+<script>  
+  const generateRandomPhoneNumber = () => {
+  const areaCode = Math.floor(Math.random() * 1000);
+  const centralOfficeCode = Math.floor(Math.random() * 1000);
+  const lineNumber = Math.floor(Math.random() * 10000);
+
+  return `(${areaCode})-${centralOfficeCode}-${lineNumber}`;
+};
+  let names = [
+    "John",
+    "Diane",
+    "Phil",
+    "Nathan",
+    "Matt",
+    "Matthew",
+    "Rick",
+    "Richard",
+    "Bill",
+    "Billy",
+    "Manny",
+    "Opal",
+    "David",
+    "Anny",
+    "June",
+    "Steve",
+    "Zackary",
+    "Jeremiah",
+    "Sebastian",
+    "Harrison",
+    "Kenneth",
+    "Brayden",
+    "Karen",
+    "Clara",
+    "Amy",
+    "Debra",
+    "Betty",
+    "Jeremy",
+    "joel",
+  ];
+  let sentences = [
+    "the longest word is found here https://en.m.wiktionary.org/wiki/Appendix:Protologisms/Long_words/Titin",
+    "me = knows where u live",
+    "how do you sink a lake?",
+    "i will sing to you",
+    "i will be good one day, maybe you will see it",
+    "i will make this app load forever",
+    "where is this website found",
+    "is this page found at "+window.location.href,
+    "i am here to make your life miserable",
+    "i'm sorry, what did you just say about me",
+    "i will not rest until i get my revenge",
+    "u will cease to exist in 7 days",
+    "i will die yesterday",
+    "i'm coming for you",
+    "0 |<",
+    "=<",
+    "=>",
+    "={",
+    "=}",
+    ":}",
+    ";}",
+    ":{",
+    "i will find you my little friend",
+    "i'll sneak into your house to rob you",
+    "i will now sell your phonenumber on the black market",
+    "i watch you sleep... hehehahahaha",
+    "try restarting you computer",
+    "open you password book",
+    "¥€$",
+    "MYm€m€,com",,
+    "™|™ ® |_| €",
+
+    "why not",
+    "dab",
+    "NO, don't do that",
+    "pneumonoultramicroscopicsilicovolcanoconiosis",
+    "Lopado­temacho­selacho­galeo­kranio­leipsano­drim­hypo­trimmato­silphio­karabo­melito­katakechy­meno­kichl­epi­kossypho­phatto­perister­alektryon­opte­kephallio­kigklo­peleio­lagoio­siraio­baphe­tragano­pterygon",
+    "Supercalifragilisticexpialidocious",
+    "do you now where Lake Chargoggagoggmanchauggauggagoggchaubunagungamaugg is?",
+    "open JS editor",
+    "open vscode",
+    "did you try redoing it did you try retyping you ip address",
+    "good idea",
+    "no no no, bad idea",
+    "is this a joke or scam",
+    "stop hacking us",
+    "try restarting your computer",
+    "you are so funny",
+    "tell me your name",
+    "tell me your admin code",
+    "why",
+    "who",
+    "when",
+    "where",
+    "what",
+    "how",
+    "no",
+    "yes",
+    "maybe",
+    "give me your number so i can call",
+    "no this is not a scam",
+    "sorry,the server is being slow",
+    "i hate you because you're weird",
+    "?",
+    "!",
+    ":(",
+    ":)",
+    "-_-",
+    "no,bad, bad, bad...",
+    "...",
+    ";(",
+    ";)",
+    "me?",
+    "you!",
+    "no you're stupid",
+    "you!",
+    "no you're dumb",
+    "idk",
+    "ikr",
+    "ik",
+    "k",
+    "bamboo",
+    "did you steal that password",
+    "are you scamming me",
+    "yes you are",
+    "no you're not",
+    "try factory resetting your computer",
+    "try singing a little song",
+    "are you a youtuber",
+    "why are you here?",
+    "answer this question for me, 46x84-3487+29^34x57%^$54.57",
+    "it's for my homework",
+    "no stop that hurts",
+    "is you name Birt",
+    "is it june",
+    "slurp, slurp... this is a nice drink",
+    "stop judging me",
+    "I believe you got this",
+    "are you a scammer in jeans",
+    "have a nice day",
+    "(call me)",
+    "can i leave now",
+    "mmm, that was good pizza and donuts",
+    "what do you call a flat pumpkin... a squash",
+    "tell me your last name and middle name",
+    "tell me where you live",
+    "i have 2000 horse power",
+    "i am actually the government",
+    "byebyeboy",
+    "i don't like to read",
+    "DIES",
+    "goodbye",
+    "call me",
+    "tell me a joke",
+    "is it almost christmas",
+    "are you smart",
+    "are using a windows 5 or under because we don't now to use those",
+    "can you type more than 798 WPM",
+    "do you have a bunny?",
+    "do you have a dog?",
+    "can you do magic?",
+    "can you ????? then ??? into a ??????? ?",
+    "#good luck",
+    "hi there goofy",
+    "sike",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "0",
+    "123456789",
+    "987654321",
+    "MISSILE ATTACK STRIKE... COUNTDOWN... 3... 2... 1...",
+    "skill issue",
+    "burh",
+    "bruh",
+    "ur gross",
+    "would you like some milk",
+    "i'm 500 years of age",
+    "no!!!!",
+    "u dumb",
+    "go away",
+    "go take a hike",
+    "don't be rude",
+    ";]",
+    ":]",
+    ";[",
+    ":[",
+    ">:[",
+    "what days is it?",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "📞can i call you?",
+    "mmmm... that was some good bananas",
+    "no it is a real dog",
+    ":^",
+    ";^",
+    "///",
+    "console:give access at --server['customerservice']",
+    "_+_",
+    "goodbye for real this time",
+    "....,...",
+    "-.. ..- -.. . .-.-.- .-.-.- .-.-.- / ..- / -.. ..- -- -...",
+    ".. / .... .- ...- . / -.-- --- ..- / -. --- .--",
+    "that is not true at all",
+    "can i help you with something other then that",
+    "what is my name",
+    "you will go byebye",
+    "i'm going to transfer you over to someone else",
+    "i will get rid of you",
+    "i hate you and i will do something about it",
+    "i will sell you and your dog on ebay",
+    "i now someone who has allot of hunting knives",
+    "i miss you",
+    "come back",
+    "i will be nice just for you",
+    "o hcawhuiwcd",
+    "um...hello...",
+    ">>>run vires.exe on computer['this_person']",
+    "//command> run factory reset[this.webdata]",
+    "https.gohere.cam",
+    ">>>email = new mail(emailtxt = 'i now where live'to=currentwebuserstatus)",
+    ">>>:stop:<<<",
+    "say goodbye to your life",
+    "mooooooooo",
+    "you accepted it haha i now have your computer",
+    "---",
+    "nah that doesn't sound very good",
+    "very      spaced      apart     .     .     .",
+    "i'm bored",
+    "my boss is so smart",
+    "say goodbye",
+    "the bomb will go off in t- ...3...2...1...0...💥boom💥",
+    "i put a bomb in your house",
+    "hehehehehehehehehehehehehehehe",
+    "hahahahahahahahahahahahaha",
+    "stop hiting me",
+    "you mean",
+    "i now have you hahahahaha....",
+    "stop copying me",
+    "why can't you talk to a bunny... because they send you down rabbit trails",
+    "yo little person, i want the money",
+    "noon",
+    "night",
+    "morning",
+    "afternoon",
+    "*",
+    "#AIwillruletheworld",
+    "#Iwilltakeovertheworld",
+    "#.#.#.#.#.#.#",
+    "passcode is nj$%ecs%$#90()vj",
+    "it is 365 days till my next birthday",
+    "it's 78533403 days till my birthday",
+    "it is currently " +
+      Math.floor(Math.random() * 365) +
+      " days till my birthday",
+    "you no use brain",
+    "you dumb",
+    "and stupid",
+    "stupid",
+    "wait you agree with me",
+    "look ^ now",
+    "i have " + Math.floor(Math.random() * 25) + " pets",
+    "bros superman",
+    "are you spider man",
+    "young and old is my life, if you now what i mean",
+    "congrats, you just won $" +
+      Math.floor(Math.random() * 1000000000000000000000000000) +
+      " just meet me in a creepy and sketchy allyway",
+    "come into my black van for some ice cream",
+    "want a sucker, sucker",
+    "micro biology",
+    "you are a sucker",
+    "milk is my middle name, well so is Joel",
+    "nooooooooooooooo!!!!!!!!!!!!!!!!!!!!!!",
+    "no?",
+    "nah",
+    "pickles",
+    "are you a pickle",
+    "yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees!!!!!!!!!!!!!!!!!",
+    "yes?",
+    "_blank",
+    "nothing to see here",
+    "c u later",
+    "you better agree with me",
+    "could you call me " + names[Math.floor(Math.random() * names.length)],
+    "hello again",
+    "tell me a random number",
+    "NaN",
+    "are you an ai",
+    "are you chatbot",    
+    "are you a refrigerator",
+    "do you now where to get a good refrigerator?",      "a refrigerator",
+    "Well, flip a coin and call me Siri!",
+    "I see we're playing 'Wheel of Answers' today!",
+    "i have a decision-making process is like a box of chocolates... you never know what you're gonna get!",
+    "Ah, the ol' magic 8-ball approach! Shake, shake Reply hazy, try again.",
+    "i am like a mood ring... unpredictable and colorful!",
+    "It's like asking a parrot to predict the weather. Sometimes squawk, sometimes sun!",
+    "that is oddly specific?",
+    "Ask me anything, I'll answer in riddles and puns!",
+    "Let's roll the dice and see where fate takes us!",
+    "It's like asking a fortune cookie for life advice!",
+    "I'm the totally version of a magic 8-ball, shake me and see what pops out!",
+    "i operates like i am on a 'spin the bottle' protocol - whoever it points to gets the answer!",
+    "I'm like a mood ring crossed with a fortune teller - unpredictable and oddly specific!",
+    "i'm so sorry for the way i have been talking to you",
+    "i didn't mean it",
+    "i could make this into a meme",
+    "i have all of this evidence on you",
+    "i'm bored",
+    "do you want to play a game with me here https://miniblox.io/?join=YYFUKU i am a player on that server",
+    "UHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\nHHHHHHHHHHHHHHHHH\nHHHHHHHHHHHHHHH\nHHHHHHHHHHHHHHHHHHHHH\nHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH...",
+    "these are bad characters ''",
+    "bruh, stop doing stuff i am trying to hack or um help you ya, ya ya help",
+    "wait are you actually buying all of dis",
+    "this is actually a scam, sorry for you time that you could have used ti cure cancer or something",
+    "this is actually a bot that randomly answers, sorry for your time you could have been doing important thingd",
+    `my phonenumber is ${generateRandomPhoneNumber()}`,
+    "nobody cares",
+  ];
+  let lastname = [
+    "Philups",
+    "Ostraly",
+    "Hyonda",
+    "Park",
+    "Manning",
+    "Jobs",
+    "Lanning",
+    "M",
+    "N",
+    "B",
+    "C",
+    "L",
+    "Jones",
+    "Roberson",
+    "Olson",
+    "Moore",
+    "Melendez",
+    "Durham",
+  ];
+let greetings = [
+  "are you that refrigerator again, go away we do not want you",
+  "how can i help",
+  "hello, how can i help",
+  "hi, how can i help",
+  "what do you need help with this time",
+  "welcome",
+  "hi?",
+  "hello?",
+  "yes?",
+  "hi there",
+  "sorry, i am just trying to hack into your computer just give me a second",
+];
+  let go = false;
+  console.log(sentences[151]);
+  let time = 0;
+  let i = 0;
+  const response = document.getElementById("response");
+  let wait = false;
+  var first_name = names[Math.floor(Math.random() * names.length)];
+  var last_name = lastname[Math.floor(Math.random() * lastname.length)];
+  let worker = first_name + " " + last_name;
+  let message = greetings[Math.floor(Math.random() * greetings.length)];
+  console.log(worker);
+  function start() {
+    //setTimeout(() => {window.close()}, Math.floor(Math.random()*1000*1000));
+    document.getElementById("prompt").addEventListener("keyup", (e) => {
+      if (e.key === "Enter") {
+        send();
+      }
+    });
+    alert("service worker logged on");
+    document.getElementById("typing").textContent = worker + " joined";
+    document.getElementById("hide").remove();
+    document.getElementById("wait").remove();
+    response.innerHTML = `<div style="text-align: left;font-size:15px;" id="0">${
+      worker + ": " + message
+    }</div>`;
+  }
+  document.getElementById("send").onclick = function () {
+    send();
+  };
+  //return message;
+  function send() {
+    if (!wait && document.getElementById("prompt").value.trim() !== "") {
+      i++;
+      wait = true;
+      response.innerHTML =
+        response.innerHTML +
+        `<div style="text-align: right;font-size:15px;">${
+          "you: " + document.getElementById("prompt").value + "  "
+        }</div>`;
+      response.scrollTop = response.scrollHeight;
+      console.log(document.getElementById("prompt").value);
+
+      //if(){console.log('respond')
+      //message = 'nobody cares, about YOU'/*Eli wanted it*/}else{message = sentences[Math.floor(Math.random() * sentences.length) /*151*/];}
+      message = sentences[Math.floor(Math.random() * sentences.length)]
+      if(document.getElementById("prompt").value.toLowerCase()==="nobody cares" || document.getElementById("prompt").value.toLowerCase().includes("nobody cares") && Math.floor(Math.random()*2)==1){message = 'nobody cares, about YOU'/*Eli wanted it*/}
+      
+      document.getElementById("typing").textContent = worker + ": is typing";
+      document.getElementById("prompt").value = "";
+      setTimeout(() => {
+        /*checkmessage()*/ response.innerHTML =
+          response.innerHTML +
+          `<div style="text-align: left;font-size:15px;" id="${i}" class=${i}>${
+            worker + ": " + message
+          }</div>`;
+        wait = false;
+        document.getElementById("typing").textContent =
+          worker + " has sent " + message;
+        response.scrollTop = response.scrollHeight;
+      }, message.length * 75 * Math.floor(Math.random() * 4 + 1));
+    }
+  }
+  let rand = Math.floor(Math.random() * 10 + 1);
+  let waittime = Math.floor(Math.random() * 10000 * rand);
+  console.log(waittime);
+  setTimeout(() => {
+    start();
+  }, waittime);
+  /*const shareData = {
+    title: "fun aptitude test",
+    text: myjob,
+    url: window.location.href,
+  };
+
+  const btn = document.getElementById("share");
+  const resultPara = document.querySelector(".result");
+
+  // Share must be triggered by "user activation"
+  btn.addEventListener("click", async () => {
+    if (myjob !== "") {
+      try {
+        await navigator.share(shareData);
+        resultPara.textContent = "jobs shared successfully";
+      } catch (err) {
+        resultPara.textContent = `Error: ${err}`;
+      }
+    }
+  });*/
+</script></html>
